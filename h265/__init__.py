@@ -1,2 +1,1 @@
-from .bit_stream import BitStream
-from .nal_unit import NALUnit
+from .bit_stream import BitStream as H265BitStream

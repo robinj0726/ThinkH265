@@ -1,7 +1,11 @@
+from .nal_unit import NALUnit
+
 class BitStream:
     def __init__(self, bits):
         self._bs = bits[24:]
-        print(self._bs)
+        self.convertPayloadToRBSP()
+
+        self.nalu = NALUnit(self)
 
     def __repr__(self):
         return f'BitStream(data:<{self._bs}>)'

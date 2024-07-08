@@ -1,3 +1,5 @@
+from .globals import g_nSymbolCounter
+
 class NALUnit:
     def __init__(self, bits):
         self._bits = bits
@@ -18,11 +20,17 @@ class NALUnit:
         self.trace_nalunit_header()
     
     def trace_nalunit_header(self):
-        print(f'*********** NAL UNIT ({self.nalunit_type_to_string(self.nal_unit_type)}) ***********')
-        print(f'forbidden_zero_bit: {self.forbidden_zero_bit}')
-        print(f'nal_unit_type: {self.nal_unit_type}')
-        print(f'nuh_layer_id: {self.nuh_layer_id}')
-        print(f'nuh_temporal_id_plus1: {self.nuh_temporal_id_plus1}')
+        global g_nSymbolCounter
+
+        print(f"*********** NAL UNIT ({self.nalunit_type_to_string(self.nal_unit_type)}) ***********")
+        print(f"{g_nSymbolCounter:>8}  {'forbidden_zero_bit':50} {'u(1)':5} : {self.forbidden_zero_bit}")
+        g_nSymbolCounter += 1
+        print(f"{g_nSymbolCounter:>8}  {'nal_unit_type':50} {'u(6)':5} : {self.nal_unit_type}")
+        g_nSymbolCounter += 1
+        print(f"{g_nSymbolCounter:>8}  {'nuh_layer_id':50} {'u(6)':5} : {self.nuh_layer_id}")
+        g_nSymbolCounter += 1
+        print(f"{g_nSymbolCounter:>8}  {'nuh_temporal_id_plus1':50} {'u(3)':5} : {self.nuh_temporal_id_plus1}")
+        g_nSymbolCounter += 1
 
     def nalunit_type_to_string(self, type):
         NalUnitType = {

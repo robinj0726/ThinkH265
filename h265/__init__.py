@@ -1,1 +1,1 @@
-from .bit_stream import BitStream as H265BitStream
+from .bitstream import BitStream as H265BitStream

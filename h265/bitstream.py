@@ -21,6 +21,9 @@ class BitStream:
     def se(self):
         return self._bits.read('se')
     
+    def byte_aligned(self):
+        return self._bits.pos % 8 == 0
+    
     # perform anti-emulation prevention
     def convert_payload_rbsp(self):
         self._bits.replace('0x000003', '0x0000', bytealigned=True)
@@ -36,5 +39,14 @@ class BitStream:
     
     def ReadFlag(self, symbolName):
         return self.ReadCode(symbolName, 1)
+    
+    def ReadUVLC(self, symbolName):
+        rValue = self.ue()
+
+        descriptor = f"ue(v)"
+        print(f"{GET_SYMBOL_COUNT():>8}  {symbolName:50} {descriptor:5} : {rValue}")
+        INC_SYMBOL_COUNT()
+        
+        return rValue
 
     
